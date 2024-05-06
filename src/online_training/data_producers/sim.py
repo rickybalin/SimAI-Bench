@@ -10,7 +10,7 @@ mpi_ops = {
         "max": MPI.MAXLOC
     }
 
-from online_training.backends.smartredis import SmartRedis_Sim_Client
+import online_training.backends as client_backends
 from online_training.data_producers import utils
 
 # Main data producer function
@@ -50,7 +50,9 @@ def main():
 
     # Initialize client
     if args.backend=='smartredis':
-        client = SmartRedis_Sim_Client(args, rank, size)
+        client = client_backends.smartredis.SmartRedis_Sim_Client(args, rank, size)
+    elif args.backend=='posix':
+        client = client_backends.posix.Posix_Sim_Client(args, rank, size)
     client.init_client()
     comm.Barrier()
     if rank==0:

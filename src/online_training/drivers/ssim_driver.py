@@ -1,6 +1,7 @@
 # general imports
 import os
 import sys 
+from typing import List
 from omegaconf import DictConfig, OmegaConf
 import hydra
 
@@ -8,20 +9,12 @@ import hydra
 from smartsim import Experiment
 from smartsim.settings import RunSettings, PalsMpiexecSettings
 
-
-## Define function to parse node list
-def parseNodeList(fname):
-    with open(fname) as file:
-        nodelist = file.readlines()
-        nodelist = [line.rstrip() for line in nodelist]
-        nodelist = [line.split('.')[0] for line in nodelist]
-    nNodes = len(nodelist)
-    return nodelist, nNodes
-
+import utils
 
 ## Co-located DB launch
-def launch_coDB(cfg, nodelist, nNodes):
+def launch_coDB(cfg: DictConfig, nodelist: List[str]) -> None:
     # Print nodelist
+    nNodes = len(nodelist)
     if (nodelist is not None):
         print(f"\nRunning on {nNodes} total nodes")
         print(nodelist, "\n")
@@ -131,7 +124,7 @@ def launch_coDB(cfg, nodelist, nNodes):
 
 
 ## Clustered DB launch
-def launch_clDB(cfg, nodelist, nNodes):
+def launch_clDB(cfg: DictConfig, nodelist: List[str]) -> None:
     # Split nodes between the components
     dbNodes_list = None
     if (nodelist is not None):
@@ -256,18 +249,18 @@ def launch_clDB(cfg, nodelist, nNodes):
 @hydra.main(version_base=None, config_path="./conf", config_name="ssim_config")
 def main(cfg: DictConfig):
     # Get nodes of this allocation (job)
-    nodelist = nNodes = None
+    nodelist = None
     if (cfg.database.launcher=='pals'):
         hostfile = os.getenv('PBS_NODEFILE')
-        nodelist, nNodes = parseNodeList(hostfile)
+        nodelist= utils.parseNodeList(hostfile)
 
     # Call appropriate launcher
     if (cfg.database.deployment == "colocated"):
         print(f"\nRunning {cfg.database.deployment} DB with {cfg.database.backend} backend\n")
-        launch_coDB(cfg, nodelist, nNodes)
+        launch_coDB(cfg, nodelist)
     elif (cfg.database.deployment == "clustered"):
         print(f"\nRunning {cfg.database.deployment} DB with {cfg.database.backend} backend\n")
-        launch_clDB(cfg, nodelist, nNodes)
+        launch_clDB(cfg, nodelist)
     else:
         print("\nERROR: Launcher is either colocated or clustered\n")
 

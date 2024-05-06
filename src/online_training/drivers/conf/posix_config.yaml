@@ -1,0 +1,20 @@
+# Workflow config
+scheduler: "pbs" # pbs,local - job scheduler
+deployment: "colocated" # colocated,clustered - deployment approach for workflow components
+
+# Simulation config
+sim:
+    executable: "" # string - path to simulation executable
+    arguments: "" # string - command line arguments to simulation
+    procs: 1 # integer - number of MPI processes for simulation
+    procs_pn: 1 # integer - number of MPI processes per node for simulation
+    cpu_bind: "none" # none, core, list, numa - CPU binding for simulation
+
+# Distributed training config
+train:
+    executable: "" # string - path to ML training executable
+    config_path: "" # string - override path for training config file
+    config_name: "" # string - override name of training config file
+    procs: 1 # integer - number of MPI processes for ML training
+    procs_pn: 1 # integer - number of MPI processes per node for ML training
+    cpu_bind: "none" # none, core, list, numa - CPU binding for ML training

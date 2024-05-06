@@ -1,0 +1,15 @@
+scheduler: local
+deployment: colocated
+sim:
+  executable: ../data_producers/sim.py
+  arguments: ''
+  procs: 1
+  procs_pn: 1
+  cpu_bind: none
+train:
+  executable: ''
+  config_path: ''
+  config_name: ''
+  procs: 1
+  procs_pn: 1
+  cpu_bind: none

@@ -1,0 +1,15 @@
+scheduler: pbs
+deployment: colocated
+sim:
+  executable: ''
+  arguments: ''
+  procs: 1
+  procs_pn: 1
+  cpu_bind: none
+train:
+  executable: ''
+  config_path: ''
+  config_name: ''
+  procs: 1
+  procs_pn: 1
+  cpu_bind: none

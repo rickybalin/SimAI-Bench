@@ -1,0 +1,2 @@
+- scheduler=local
+- sim.executable=../data_producers/sim.py
