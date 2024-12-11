@@ -205,7 +205,7 @@ def main(cfg: DictConfig):
     # Print FOM
     train_array_sz = client.train_array_sz / 1024 / 1024 / 1024
     if comm.rank==0:
-        logger.info("FOM:")
+        logger.info("\nFOM:")
         utils.print_fom(logger, t_data.t_tot, train_array_sz, client.time_stats)
 
     if cfg.online.backend:

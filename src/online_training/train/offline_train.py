@@ -55,7 +55,7 @@ def train(comm, model, train_loader, optimizer, scaler, mixed_dtype,
 
         # Print data for some ranks only
         if (comm.rank==0 and (batch_idx)%10==0):
-            logger.debug(f'{comm.rank}: Train Epoch: {epoch+1} | ' + \
+            logger.debug(f'[{comm.rank}]: Train Epoch: {epoch+1} | ' + \
                          f'[{batch_idx+1}/{num_batches}] | ' + \
                          f'Loss: {loss.item():>8e}')
 
