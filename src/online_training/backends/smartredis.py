@@ -283,7 +283,7 @@ class SmartRedis_Sim_Client:
                            f"max = {val['max'][0]:>8e} , " + \
                            f"avg = {val['avg']:>8e} , " + \
                            f"std = {val['std']:>8e} "
-            logger.info(f"SmartRedis {key} [s] " + stats_string)
+            logger.info(f"Client {key} [s] " + stats_string)
 
 
 ##########################################################
@@ -490,4 +490,4 @@ class SmartRedis_Train_Client:
                            f"max = {val['max'][0]:>8e} , " + \
                            f"avg = {val['avg']:>8e} , " + \
                            f"std = {val['std']:>8e} "
-            logger.info(f"SmartRedis {key} [s] " + stats_string)
+            logger.info(f"Client {key} [s] " + stats_string)

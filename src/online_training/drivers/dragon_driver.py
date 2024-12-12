@@ -346,7 +346,7 @@ def main(cfg: DictConfig):
     # Get information on this allocation
     #sched_nodelist = parseNodeList(cfg.scheduler)
     alloc = System()
-    num_tot_nodes = alloc.nnodes()
+    num_tot_nodes = alloc.nnodes
     dragon_nodelist = alloc.nodes
 
     # Start the Dragon Distributed Dictionary (DDict)
